@@ -1,0 +1,28 @@
+<div id="<%= dom_id product %>">
+  <p>
+    <strong>Name:</strong>
+    <%= product.name %>
+  </p>
+
+  <p>
+    <strong>Price:</strong>
+    <%= product.price %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= product.description %>
+  </p>
+
+  <p>
+    <strong>Stock:</strong>
+    <%= product.stock %>
+  </p>
+
+  <p>
+    <% if product.image.attached? %>
+<%= image_tag(product.image.variant(resize_to_limit: "100x100!"), class: 'img-responsive-full' ) %>
+<% end %>
+ </p>
+
+</div>

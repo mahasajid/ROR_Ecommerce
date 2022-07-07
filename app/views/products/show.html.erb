@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+
+
+<p>
+    <strong>Product ID:</strong>
+    <%= @product.id %>
+</p>
+
+<%= render @product %>
+
+<div>
+
+
+  <%= link_to "Edit this product", edit_product_path(@product) %> 
+  <%= link_to "Add to Cart", order_path(@product)%> 
+  <%= link_to "See More", products_path %>
+
+
+  <%= button_to "Destroy this product", @product, method: :delete %>
+</div>
