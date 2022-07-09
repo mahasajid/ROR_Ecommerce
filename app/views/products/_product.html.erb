@@ -21,7 +21,7 @@
 
   <p>
     <% if product.image.attached? %>
-<%= image_tag(product.image.variant(resize_to_limit: "100x100!"), class: 'img-responsive-full' ) %>
+<%= image_tag(product.image.variant(resize_to_limit: "100x100!") ) %>
 <% end %>
  </p>
 

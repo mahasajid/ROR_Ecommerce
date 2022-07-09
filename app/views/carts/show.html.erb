@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+
+<div>
+  <%= link_to "Continue Shopping?", products_path %>
+
+  <section class = "section">
+
+  <%= render (@cart.line_items) %>
+
+
+  Total: <%=@cart.total_price%>
+  <%= button_to "Destroy this cart", @cart, method: :delete %>
+
+
+  <section>
+</div>

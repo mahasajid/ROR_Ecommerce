@@ -1,0 +1,27 @@
+<div id="<%= dom_id line_item %>">
+
+
+ <p>
+    <strong>Name</strong>
+    <%= line_item.product.name %>
+  </p>
+
+  <p>
+    <strong>Quantity</strong>
+    <%= line_item.quantity %>
+  </p>
+
+  <p>
+    <strong>Price</strong>
+    <%= line_item.product.price %>
+  </p>
+
+
+   <% if line_item.product.image.attached? %>
+<%= image_tag(line_item.product.image) %>
+<% end %>
+
+ 
+ <%= button_to 'Remove Item', line_item, method: :delete, data: { confirm: "Are you sure you want to remove this item?"}%>
+
+</div>
