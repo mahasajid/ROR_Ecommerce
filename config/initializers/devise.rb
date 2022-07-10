@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '1f2bf2c28b4d0e061b952ea2edf6c414bfac52b3739f7f0d15b20ced795e8b5f0bb1a29bfad15dafa98f0742eb0ba23874c936f96a7a63a34d7f470fe3f605fa'
+  # config.secret_key = '44258f31fa55fe5cc2a7806e27ea14cabb51d80f0b01a2aa3b1de2e21c5d19bd39e58e0a75970c0ff109314768fd3a88126906b5413eb6e9039976e74aeab863'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '851c91ac43d44c0dca6f952210a4c53e538272561e65b5fe7a4551daf579b097b8c527064b58be6fc218afa15b233455278aeb6e924c2e8b9dd3b406d36ff493'
+  # config.pepper = 'ed47ed01b35da6aaa85af026516e8c1c18edf2758a3327c333b93aef403abfb1861a6e65e2705e326566c7d01409a98667d1f4e9bdeec0749815e7e881608d46'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -244,7 +244,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -308,4 +308,6 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-end
+  config.navigational_formats = ['*/*', :html, :turbo_stream]
+  #config.omniauth :facebook, "551695616443770", "ab871d733b0aa35faafb1e6c7d97c5cd", token_params: { parse: :json }
+end 

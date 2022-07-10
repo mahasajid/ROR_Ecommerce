@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    sessions: 'users/sessions'}
+    sessions: 'users/sessions',
+  registerable: 'users/registrations'}
   
   resources :line_items
   resources :carts
