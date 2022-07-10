@@ -10,8 +10,19 @@
 
 
   Total: <%=@cart.total_price%>
-  <%= button_to "Destroy this cart", @cart, method: :delete %>
+  <%= button_to "Empty Cart", @cart, method: :delete %>
 
 
-  <section>
+<% if user_signed_in? %>
+
+<%= link_to "Checkout" , products_path , notice: "Confirm your shipping address" %>
+<%= flash[:notice] = "Confirm your shipping address" %>
+
+<% else%>
+ <%= link_to "Checkout" , new_user_session_path , notice: "You must sign in to continue" %>
+ <%= flash[:notice] = "You must sign in to continue" %>
+
+ <% end%>
+
+  </section>
 </div>

@@ -1,27 +1,37 @@
 <div id="<%= dom_id line_item %>">
 
-
+<div class= "card" >
+<div class = "row">
+<div class = "column" >
  <p>
     <strong>Name</strong>
     <%= line_item.product.name %>
   </p>
 
+  </div>
+
+<div class = "column" >
   <p>
     <strong>Quantity</strong>
     <%= line_item.quantity %>
   </p>
 
+  </div>
+<div class = "column" >
   <p>
     <strong>Price</strong>
     <%= line_item.product.price %>
   </p>
-
-
+</div>
+<div class = "column" >
    <% if line_item.product.image.attached? %>
 <%= image_tag(line_item.product.image) %>
 <% end %>
-
+</div>
  
  <%= button_to 'Remove Item', line_item, method: :delete, data: { confirm: "Are you sure you want to remove this item?"}%>
+
+</div>
+ </div>
 
 </div>
