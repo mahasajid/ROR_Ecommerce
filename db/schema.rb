@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_10_090325) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_12_081550) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,6 +42,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_090325) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "order_status", default: "pending"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "carts_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "cart_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_carts_users_on_cart_id"
+    t.index ["user_id"], name: "index_carts_users_on_user_id"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -86,6 +98,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_090325) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "shipping_address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

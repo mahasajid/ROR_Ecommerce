@@ -15,7 +15,7 @@
 
 <% if user_signed_in? %>
 
-<%= link_to "Checkout" , products_path , notice: "Confirm your shipping address" %>
+<%= link_to "Checkout" , edit_cart_path , notice: "Confirm your shipping address" %>
 <%= flash[:notice] = "Confirm your shipping address" %>
 
 <% else%>

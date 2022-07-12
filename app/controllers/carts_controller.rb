@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: %i[ show edit update destroy ]
-
+  before_action :set_cart, only: %i[ show edit update destroy  confirm ]
+  #before_action :set_line_item, only: %i[ checkout ]
   # GET /carts or /carts.json
   def index
     @carts = Cart.all
@@ -13,6 +13,8 @@ class CartsController < ApplicationController
   # GET /carts/new
   def new
     @cart = Cart.new
+
+    #@cart.current_user.build
   end
 
   # GET /carts/1/edit
@@ -22,6 +24,7 @@ class CartsController < ApplicationController
   # POST /carts or /carts.json
   def create
     @cart = Cart.new(cart_params)
+    @cart.save
 
     respond_to do |format|
       if @cart.save
@@ -36,9 +39,16 @@ class CartsController < ApplicationController
 
   # PATCH/PUT /carts/1 or /carts/1.json
   def update
+   #@friend = current_account.friends.build(friend_params)
+   #@user = current_user
+
+   @cart.order_status = "ordered"
+   #current_user.cart.build(@cart_params)
+  
     respond_to do |format|
       if @cart.update(cart_params)
-        format.html { redirect_to cart_url(@cart), notice: "Cart was successfully updated." }
+        
+        format.html { redirect_to products_path, notice: "Cart was successfully updated." }
         format.json { render :show, status: :ok, location: @cart }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,6 +67,27 @@ class CartsController < ApplicationController
     end
   end
 
+#GET /checkout
+  def checkout
+
+  end
+
+
+#PUT /checkout
+def confirm
+  respond_to do |format|
+    if @cart.update(cart_params)
+      format.html { redirect_to products_path, notice: "Order was placed" }
+      format.json { render :show, status: :ok, location: @cart }
+    else
+      format.html { render :edit, status: :unprocessable_entity }
+      format.json { render json: @cart.errors, status: :unprocessable_entity }
+    end
+  end
+
+
+end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cart
@@ -65,6 +96,17 @@ class CartsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cart_params
-      params.fetch(:cart, {})
+      #params.fetch(:cart, {})
+
+      params.require(:cart).permit( :user_id, :order_status, :users_attributes => [:id, :shipping_address, :name, :email])
     end
+
+    # def user_params
+    #   params.require(:user).permit( :name , :shipping_address, :email )
+    # end
+
+
+
+
+   
 end

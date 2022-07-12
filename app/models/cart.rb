@@ -1,6 +1,7 @@
 class Cart < ApplicationRecord
     has_many :line_items, dependent: :destroy
-
+    has_and_belongs_to_many :user
+    accepts_nested_attributes_for :user
     def add_product (product)
         current_item = line_items.find_by(product_id: product.id)
 

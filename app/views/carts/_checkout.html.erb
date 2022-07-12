@@ -1,0 +1,35 @@
+<h2>CheckOut </h2>
+
+<%= form_with(model: @cart) do |form| %>
+
+  
+  <div class="field">
+    <%= form.label :order_status %><br />
+    <%= form.text_field :order_status, autofocus: true %>
+    
+  </div>
+
+  <%= form.fields_for :users do |f| %>
+  
+    <%= f.label :name  %><br />
+    <%= f.text_field :name, autofocus: true, value: current_user.name %>
+    
+  
+
+<div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, value: current_user.email %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :shipping_address %><br />
+    <%= f.text_field :shipping_address, autofocus: true, value: current_user.shipping_address %>
+  </div>
+
+  <% end %>
+  
+  <div class="actions">
+    <%= form.submit "Check Out" %>
+  </div>
+<% end %>
