@@ -1,6 +1,8 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: %i[ show edit update destroy  confirm ]
- # around_action :changed_order_status
+
+#include CurrentCart
+#before_action :set_cart, only: %i[ show edit update destroy  confirm ]
+
   #before_action :set_line_item, only: %i[ checkout ]
   # GET /carts or /carts.json
   def index
@@ -12,8 +14,12 @@ class CartsController < ApplicationController
   end
 
   # GET /carts/new
-  def new
-    @cart = Cart.new
+   def new
+  #@cart = Cart.new
+  #@cart.user = current_user
+  @cart = current_user.carts.build
+
+    
 
     #@cart.current_user.build
   end
@@ -21,13 +27,16 @@ class CartsController < ApplicationController
   # GET /carts/1/edit
   def edit
     @cart.user = current_user
+
   end
 
   # POST /carts or /carts.json
   def create
-    @cart = Cart.new(cart_params)
-    @friend = current_account.friends.build(friend_params)
-    @cart.save
+
+    @cart = current_user.cart.build(cart_params)
+    @cart.user = current_user
+    # @cart = Cart.new(cart_params)
+    # @cart.save
 
     respond_to do |format|
       if @cart.save
@@ -52,9 +61,6 @@ class CartsController < ApplicationController
   
     respond_to do |format|
       if @cart.update(cart_params)
-        #params[:order_status] = "ordered"
-        #changed_order_status("ordered")
-        #yield
         format.html { redirect_to products_path, notice: "Your order has been placed" }
         format.json { render :show, status: :ok, location: @cart }
       else
@@ -112,13 +118,6 @@ end
     # def user_params
     #   params.require(:user).permit( :name , :shipping_address, :email )
     # end
-
-    
-    def changed_order_status
-      params[:order_status] = "ordered"
-
-    end
-
 
 
    

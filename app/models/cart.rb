@@ -1,6 +1,6 @@
 class Cart < ApplicationRecord
     has_many :line_items, dependent: :destroy
-    belongs_to :user
+    belongs_to :user, optional: true
     accepts_nested_attributes_for :user
     before_update :update_order_status
 
@@ -28,8 +28,7 @@ class Cart < ApplicationRecord
 
 
   def update_order_status
-   @cart = Cart.find_by(id: id)
-   @cart.order_status = "ordered"
+   self.order_status = "ordered"
     
   end
 end

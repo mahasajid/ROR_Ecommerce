@@ -12,9 +12,4 @@ module ApplicationHelper
         @devise_mapping ||= Devise.mappings[:user]
       end
 
-
-      def change_order_status (status)
-        @cart.order_status = status
-
-      end
 end

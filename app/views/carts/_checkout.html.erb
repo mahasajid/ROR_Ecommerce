@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-
+<% if @cart.order_status == "pending" %>
   <div>
     <%= form.hidden_field :user_id %>
   </div>
 
   <div>
-    <%= form.label :order_status, style: "display: block" %>
-    <%= form.text_field :order_status %>
+    <%= form.label :order_status, style: "display: inline" %>
+   :  <%=  @cart.order_status %>
   </div>
 
   <div>
@@ -26,7 +26,13 @@
     <%= form.text_field :shipping_address %>
   </div>
 
+  Total: <%=@cart.total_price%>
+
+  
+
   <div>
     <%= form.submit "Check Out" %>
   </div>
+
+  <% end%>
 <% end %>
