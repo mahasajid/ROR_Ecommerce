@@ -28,7 +28,7 @@
 </div>
 <div class = "column" >
    <% if line_item.product.image.attached? %>
-<%= image_tag(line_item.product.image.representation(resize: '100x100')) %>
+<%= image_tag(line_item.product.image) %>
 <% end %>
 </div>
  

@@ -20,11 +20,13 @@ class CartsController < ApplicationController
 
   # GET /carts/1/edit
   def edit
+    @cart.user = current_user
   end
 
   # POST /carts or /carts.json
   def create
     @cart = Cart.new(cart_params)
+    @friend = current_account.friends.build(friend_params)
     @cart.save
 
     respond_to do |format|
@@ -40,7 +42,7 @@ class CartsController < ApplicationController
 
   # PATCH/PUT /carts/1 or /carts/1.json
   def update
-   #@friend = current_account.friends.build(friend_params)
+   
    #@user = current_user
 
    #params[:order_status] = "ordered"
@@ -74,7 +76,7 @@ class CartsController < ApplicationController
 
 #GET /checkout
   def checkout
-
+    @cart.user = current_user
   end
 
 
@@ -104,7 +106,7 @@ end
     def cart_params
       #params.fetch(:cart, {})
 
-      params.require(:cart).permit( :user_id, :order_status, :user_attributes => [:id, :shipping_address, :name, :email])
+      params.require(:cart).permit( :user_id, :order_status,:shipping_address)
     end
 
     # def user_params

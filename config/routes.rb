@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   registerable: 'users/registrations'} 
 
 
-  devise_scope :user do
-    get 'users/registrations/check', :to => 'users/registrations#checkout', as: "checkout"
-  end
+  # devise_scope :user do
+  #   get 'users/registrations/check', :to => 'users/registrations#checkout', as: "checkout"
+  # end
   #get "/check" => "users/registrations#checkout"
 
 
