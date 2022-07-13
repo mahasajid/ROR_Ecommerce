@@ -9,7 +9,7 @@
     
   </div>
 
-  <%= form.fields_for :users do |f| %>
+  <%= form.fields_for :user, @cart.user do |f| %>
   
     <%= f.label :name  %><br />
     <%= f.text_field :name, autofocus: true, value: current_user.name %>
@@ -27,9 +27,14 @@
     <%= f.text_field :shipping_address, autofocus: true, value: current_user.shipping_address %>
   </div>
 
+
+  <%= change_order_status("ordered")%>
+
+
   <% end %>
   
   <div class="actions">
+  
     <%= form.submit "Check Out" %>
   </div>
 <% end %>

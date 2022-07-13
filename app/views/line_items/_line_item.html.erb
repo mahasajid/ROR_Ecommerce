@@ -12,7 +12,12 @@
 
 <div class = "column" >
   <label for="quantity">Quantity </label>
-<input type="number"  value = <%=line_item.quantity%> min = "1" max = <%=line_item.product.stock%>>
+
+  
+<div type="number"  value = <%=line_item.quantity%> min = "1" max = <%=line_item.product.stock%>>
+
+<%=line_item.quantity%>
+</div>
 
   </div>
 <div class = "column" >
@@ -23,7 +28,7 @@
 </div>
 <div class = "column" >
    <% if line_item.product.image.attached? %>
-<%= image_tag(line_item.product.image) %>
+<%= image_tag(line_item.product.image.representation(resize: '100x100')) %>
 <% end %>
 </div>
  
