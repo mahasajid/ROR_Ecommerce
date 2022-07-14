@@ -24,6 +24,10 @@ class Users::SessionsController < Devise::SessionsController
     
   # end
 
+
+  def history
+  end
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.

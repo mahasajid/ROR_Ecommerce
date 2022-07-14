@@ -22,17 +22,18 @@
   </div>
 
   <div>
-    <%= form.label :shipping_address, style: "display: block" %>
-    <%= form.text_field :shipping_address %>
+    <%= form.label :shipping_address, style: "display: block"  %>
+    <%= form.text_field :shipping_address ,  required: true %>
   </div>
 
   Total: <%=@cart.total_price%>
 
-  
+  <%if @cart.total_price > 0%>
 
   <div>
     <%= form.submit "Check Out" %>
   </div>
+  <%end%>
 
   <% end%>
 <% end %>
