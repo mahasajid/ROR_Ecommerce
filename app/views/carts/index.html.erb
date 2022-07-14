@@ -4,7 +4,7 @@
 <h1>Order History</h1>
 
 <div id="carts">
-  <% @carts.each do |cart| %>
+  <% current_user.carts.each do |cart| %>
     <%= render cart %>
   <% end %>
 </div>
