@@ -4,6 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :carts
+  has_many :carts 
   accepts_nested_attributes_for :carts
 end
