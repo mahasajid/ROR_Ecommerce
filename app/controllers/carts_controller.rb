@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
 
 #include CurrentCart
-#before_action :set_cart, only: %i[ show edit update destroy  confirm ]
+before_action :set_cart, only: %i[ show edit update destroy  confirm ]
 
   #before_action :set_line_item, only: %i[ checkout ]
   # GET /carts or /carts.json

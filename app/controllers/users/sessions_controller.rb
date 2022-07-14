@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  before_action :configure_sign_in_params, only: [:create]
+  #  before_action :configure_sign_in_params, only: [:create]
+ 
 
   # GET /resource/sign_in
   # def new
@@ -16,6 +17,8 @@ class Users::SessionsController < Devise::SessionsController
   # DELETE /resource/sign_out
   # def destroy
   #   super
+  # rescue ActiveRecord::RecordNotFound
+  #   redirect_to root_path
   # end
 
 

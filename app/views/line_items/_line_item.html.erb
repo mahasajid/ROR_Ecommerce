@@ -33,8 +33,11 @@
 </div>
  
 
+ <% if line_item.cart.order_status != "ordered" %>
+
  <%= button_to 'Remove Item', line_item, method: :delete, data: { confirm: "Are you sure you want to remove this item?"}%>
 
+<%end%>
 </div>
  </div>
 
