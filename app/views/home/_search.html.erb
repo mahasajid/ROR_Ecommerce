@@ -1,0 +1,10 @@
+<h1>Products Search</h1>
+
+<%= form_with url: "/search" , method: :get do |f| %>
+  <p>
+    <%= f.label "Search for" %>
+    <%= f.text_field :q %>
+    <%= f.submit "Go", name: nil %>
+  </p>
+<% end %>
+

@@ -33,6 +33,11 @@
        <%=@user = current_user%>
       <%= link_to 'History', carts_path , class: "navbar-brand" %> 
 
+      <<div class= "container">
+    <%= render  "home/search" %>
+    </div>
+  </body>
+
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
