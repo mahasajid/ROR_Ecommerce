@@ -2,6 +2,9 @@
 
 
 <ul>
+<%if @products.blank?%>
+<p> No results for your search </p>
+<%end%>
   <% @products.each do |product| %>
     <li>
       <h3>
