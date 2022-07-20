@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_19_114940) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_20_054146) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_19_114940) do
     t.string "order_status", default: "pending"
     t.integer "user_id"
     t.string "shipping_address"
+    t.string "billing_address"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 

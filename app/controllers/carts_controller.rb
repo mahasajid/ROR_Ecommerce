@@ -116,7 +116,7 @@ end
     def cart_params
       #params.fetch(:cart, {})
 
-      params.require(:cart).permit( :user_id, :order_status,:shipping_address)
+      params.require(:cart).permit( :user_id, :order_status,:shipping_address, :billing_address)
     end
 
     # def user_params

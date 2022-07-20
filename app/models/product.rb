@@ -68,4 +68,4 @@ end
 
 end
 
-Product.import
+Product.import(force: true)
