@@ -2,7 +2,7 @@ class Cart < ApplicationRecord
     has_many :line_items, dependent: :destroy
     belongs_to :user, optional: true
     accepts_nested_attributes_for :user
-    before_update :update_order_status , :update_stock
+    before_update :update_order_status #:update_stock
 
     def add_product (product)
         current_item = line_items.find_by(product_id: product.id)
@@ -29,21 +29,34 @@ class Cart < ApplicationRecord
   def update_order_status
     if self.order_status == "pending"
       self.order_status = "ordered"
+      self.line_items.each {|item|
+      item.product.stock = item.product.stock - item.quantity
+      item.product.save}
     else
- 
-    
       self.order_status = "cancelled"
+      self.line_items.each {|item|
+      item.product.stock = item.product.stock + item.quantity
+      item.product.save} 
     end
     
   end
 
 
 
-  def update_stock
-    self.line_items.each {|item|
-    item.product.stock = item.product.stock - item.quantity
-    item.product.save
-    }
+#   def update_stock
+#     if self.order_status == "pending"
+#     self.line_items.each {|item|
+#     item.product.stock = item.product.stock - item.quantity
+#     item.product.save
+#     }
 
-  end
+#   else
+
+#     self.line_items.each {|item|
+#     item.product.stock = item.product.stock + item.quantity
+#     item.product.save
+#     }
+
+
+#   end
 end
