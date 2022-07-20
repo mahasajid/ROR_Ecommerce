@@ -3,6 +3,11 @@
 
 <% if cart.order_status != "pending"%>
 <div class = "card">
+
+  <p>
+    <strong>Order Number</strong>
+    <%= cart.id %>
+  </p>
   <p>
     <strong>Order Status</strong>
     <%= cart.order_status %>

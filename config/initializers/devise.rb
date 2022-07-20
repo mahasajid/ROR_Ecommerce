@@ -312,3 +312,4 @@ Devise.setup do |config|
 
   
   #config.omniauth :google_oauth2, , 
+end
