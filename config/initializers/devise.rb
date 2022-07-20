@@ -310,5 +310,5 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
   config.navigational_formats = ['*/*', :html, :turbo_stream]
 
-  config.omniauth :google_oauth2, "446757828480-opgvf2ak4j0k86hmod9pe3fbrqs2jjvq.apps.googleusercontent.com", "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"
+  #config.omniauth :google_oauth2, 
 end 
