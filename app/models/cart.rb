@@ -4,7 +4,6 @@ class Cart < ApplicationRecord
     accepts_nested_attributes_for :user
     before_update :update_order_status , :update_stock
 
-
     def add_product (product)
         current_item = line_items.find_by(product_id: product.id)
 
@@ -28,7 +27,13 @@ class Cart < ApplicationRecord
 
 
   def update_order_status
-   self.order_status = "ordered"
+    if self.order_status == "pending"
+      self.order_status = "ordered"
+    else
+ 
+    
+      self.order_status = "cancelled"
+    end
     
   end
 

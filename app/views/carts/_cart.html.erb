@@ -1,7 +1,7 @@
 <div id="<%= dom_id cart %>">
 
 
-<% if cart.order_status == "ordered"%>
+<% if cart.order_status != "pending"%>
 <div class = "card">
   <p>
     <strong>Order Status</strong>
@@ -25,6 +25,16 @@
     <%= cart.billing_address %>
   </p>
 
+<%if cart.order_status == "ordered"%>
+
+<%= form_with(model: cart) do |form| %>
+<div>
+    <%= form.hidden_field :user_id %>
+  </div>
+
+ <%= form.submit "Cancel Order" %>
+<%end%>
+<%end%>
 
  
 

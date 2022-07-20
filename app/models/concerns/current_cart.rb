@@ -7,7 +7,7 @@ module CurrentCart
         @cart = Cart.find(session[:cart_id])
         
 
-        if @cart.order_status == "ordered"
+        if @cart.order_status != "pending"
         
             @cart =  Cart.create! #returns object with id:nil
             @cart.user = current_user

@@ -2,7 +2,7 @@ class CartsController < ApplicationController
 
 #include CurrentCart
 before_action :set_cart, only: %i[ show edit update destroy  confirm ]
-
+before_action :update_order_status, only: %i[update]
   #before_action :set_line_item, only: %i[ checkout ]
   # GET /carts or /carts.json
   def index
@@ -58,15 +58,22 @@ before_action :set_cart, only: %i[ show edit update destroy  confirm ]
    #@cart.order_status = "ordered"
    #current_user.cart.build(@cart_params)
    #changed_order_status("ordered")
+
   
     respond_to do |format|
-      if @cart.update(cart_params)
+     if @cart.update(cart_params)
+      if params[:order_status] == "ordered"
         mail = UsersMailer.confirmation_email(current_user.id)
-
         #mail.deliver_now
         mail.deliver_later
         format.html { redirect_to products_path, notice: "Your order has been placed" }
         format.json { render :show, status: :ok, location: @cart }
+
+      else
+        format.html { redirect_to carts_path, notice: "Your order has been cancelled" }
+        format.json { render :show, status: :ok, location: @cart }
+      end
+
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @cart.errors, status: :unprocessable_entity }
@@ -86,7 +93,7 @@ before_action :set_cart, only: %i[ show edit update destroy  confirm ]
 
 #GET /checkout
   def checkout
-    @cart.user = current_user
+    #@cart.user = current_user
   end
 
 
@@ -95,7 +102,8 @@ def confirm
 
   respond_to do |format|
     if @cart.update(cart_params)
-      format.html { redirect_to products_path, notice: "Order was placed" }
+
+      format.html { redirect_to products_path, notice: "Your order was cancelled" }
       format.json { render :show, status: :ok, location: @cart }
     else
       format.html { render :edit, status: :unprocessable_entity }
@@ -123,6 +131,15 @@ end
     #   params.require(:user).permit( :name , :shipping_address, :email )
     # end
 
+    def update_order_status
+      if params[:order_status] == "pending"
+        params[:order_status] = "ordered"
+      else
+      
+        params[:order_status] = "cancelled"
+      end
+      
+    end
 
    
 end
