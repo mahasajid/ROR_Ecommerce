@@ -33,13 +33,22 @@
     <%= form.text_field :billing_address ,  required: true %>
   </div>
 
-  Total: <%=@cart.total_price%>
+<div>
+  Tax : 5%
+</div>
+<div>
+  Shipping Charges: 30.0
+</div>
 
-  <%if @cart.total_price > 0%>
-
+  <%if @cart.total_price > 30.0%>
+  <div>
+      Total: <%=@cart.total_price*1.05 + 30.0%>
+  </div>
   <div>
     <%= form.submit "Check Out" %>
   </div>
+
+
   <%end%>
 
   <% end%>
