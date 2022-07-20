@@ -90,3 +90,4 @@ gem "omniauth-rails_csrf_protection"
 gem 'figaro'
 gem 'rake'
 gem 'bonsai-elasticsearch-rails'
+gem 'faker'
