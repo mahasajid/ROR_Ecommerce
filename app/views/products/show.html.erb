@@ -11,8 +11,6 @@
 <div>
 
 
-  <%= link_to "Edit this product", edit_product_path(@product) %> 
-
   <% if @product.stock > 0 %>
   <%= button_to "Add to Cart", line_items_path(product_id: @product), method: :post %> 
 
@@ -22,6 +20,4 @@
   <%end%>
   <%= link_to "See More", products_path %>
 
-
-  <%= button_to "Destroy this product", @product, method: :delete %>
 </div>
