@@ -1,7 +1,10 @@
 class Cart < ApplicationRecord
     has_many :line_items, dependent: :destroy
-    has_and_belongs_to_many :user
+    belongs_to :user, optional: true
     accepts_nested_attributes_for :user
+    before_update :update_order_status
+
+
     def add_product (product)
         current_item = line_items.find_by(product_id: product.id)
 
@@ -23,4 +26,9 @@ class Cart < ApplicationRecord
     line_items.to_a.sum {|item| item.total_price}
   end
 
+
+  def update_order_status
+   self.order_status = "ordered"
+    
+  end
 end

@@ -1,35 +1,39 @@
-<h2>CheckOut </h2>
+<%= form_with(model: cart) do |form| %>
+  <% if cart.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(cart.errors.count, "error") %> prohibited this cart from being saved:</h2>
 
-<%= form_with(model: @cart) do |form| %>
-
-  
-  <div class="field">
-    <%= form.label :order_status %><br />
-    <%= form.text_field :order_status, autofocus: true %>
-    
-  </div>
-
-  <%= form.fields_for :users do |f| %>
-  
-    <%= f.label :name  %><br />
-    <%= f.text_field :name, autofocus: true, value: current_user.name %>
-    
-  
-
-<div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, value: current_user.email %>
-  </div>
-
-
-  <div class="field">
-    <%= f.label :shipping_address %><br />
-    <%= f.text_field :shipping_address, autofocus: true, value: current_user.shipping_address %>
-  </div>
-
+      <ul>
+        <% cart.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
-  
-  <div class="actions">
+
+<% if @cart.order_status == "pending" %>
+  <div>
+    <%= form.hidden_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :order_status, style: "display: inline" %>
+   :  <%=  @cart.order_status %>
+  </div>
+
+  <div>
+    <%= form.label :shipping_address, style: "display: block"  %>
+    <%= form.text_field :shipping_address ,  required: true %>
+  </div>
+
+  Total: <%=@cart.total_price%>
+
+  <%if @cart.total_price > 0%>
+
+  <div>
     <%= form.submit "Check Out" %>
   </div>
+  <%end%>
+
+  <% end%>
 <% end %>
