@@ -83,3 +83,8 @@ gem "actionpack-page_caching"
 gem "actionpack-action_caching"
 gem 'hiredis'
 gem 'redis'
+gem 'dotenv-rails'
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
+gem 'figaro'

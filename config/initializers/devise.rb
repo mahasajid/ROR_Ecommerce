@@ -125,7 +125,7 @@ Devise.setup do |config|
   # a value of 20 is already extremely slow: approx. 60 seconds for 1 calculation).
   config.stretches = Rails.env.test? ? 1 : 12
 
-  # Set up a pepper to generate the hashed password.
+  # Set up a pepper to generate the hashed password
   # config.pepper = 'ed47ed01b35da6aaa85af026516e8c1c18edf2758a3327c333b93aef403abfb1861a6e65e2705e326566c7d01409a98667d1f4e9bdeec0749815e7e881608d46'
 
   # Send a notification to the original email when the user's email is changed.
@@ -309,5 +309,6 @@ Devise.setup do |config|
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
   config.navigational_formats = ['*/*', :html, :turbo_stream]
-  #config.omniauth :facebook, "551695616443770", "ab871d733b0aa35faafb1e6c7d97c5cd", token_params: { parse: :json }
+
+  #config.omniauth :google_oauth2, 
 end 
