@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_19_114940) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_20_054146) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -34,7 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_19_114940) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -45,32 +48,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_19_114940) do
     t.string "order_status", default: "pending"
     t.integer "user_id"
     t.string "shipping_address"
+    t.string "billing_address"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "line_items", force: :cascade do |t|
-    t.integer "product_id", null: false
-    t.integer "cart_id", null: false
+    t.bigint "product_id", null: false
+    t.bigint "cart_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "quantity", default: 1
     t.index ["cart_id"], name: "index_line_items_on_cart_id"
     t.index ["product_id"], name: "index_line_items_on_product_id"
-  end
-
-  create_table "order_details", force: :cascade do |t|
-    t.float "total_amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "orders", force: :cascade do |t|
-    t.string "order_email"
-    t.string "shipping_address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "products_id", null: false
-    t.index ["products_id"], name: "index_orders_on_products_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -103,5 +92,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_19_114940) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "products"
-  add_foreign_key "orders", "products", column: "products_id"
 end

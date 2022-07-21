@@ -1,13 +1,8 @@
 class SearchController < ApplicationController
     
     def search
-    #   unless params[:query].blank?
-    #     @products = Product.search( params[:query] )
-    #   end
-
     if params[:q].nil?
-        @products = []
-        
+        @products = []       
     else
         @products = Product.search params[:q]
     end

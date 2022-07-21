@@ -2,8 +2,7 @@ class CartsController < ApplicationController
 
 #include CurrentCart
 before_action :set_cart, only: %i[ show edit update destroy  confirm ]
-
-  #before_action :set_line_item, only: %i[ checkout ]
+before_action :update_order_status, only: %i[update]
   # GET /carts or /carts.json
   def index
     @carts = Cart.all
@@ -15,13 +14,7 @@ before_action :set_cart, only: %i[ show edit update destroy  confirm ]
 
   # GET /carts/new
    def new
-  #@cart = Cart.new
-  #@cart.user = current_user
   @cart = current_user.carts.build
-
-    
-
-    #@cart.current_user.build
   end
 
   # GET /carts/1/edit
@@ -35,9 +28,6 @@ before_action :set_cart, only: %i[ show edit update destroy  confirm ]
 
     @cart = current_user.cart.build(cart_params)
     @cart.user = current_user
-    # @cart = Cart.new(cart_params)
-    # @cart.save
-
     respond_to do |format|
       if @cart.save
         format.html { redirect_to cart_url(@cart), notice: "Cart was successfully created." }
@@ -51,22 +41,18 @@ before_action :set_cart, only: %i[ show edit update destroy  confirm ]
 
   # PATCH/PUT /carts/1 or /carts/1.json
   def update
-   
-   #@user = current_user
-
-   #params[:order_status] = "ordered"
-   #@cart.order_status = "ordered"
-   #current_user.cart.build(@cart_params)
-   #changed_order_status("ordered")
-  
-    respond_to do |format|
-      if @cart.update(cart_params)
+     respond_to do |format|
+     if @cart.update(cart_params)
+      if params[:order_status] == "ordered"
         mail = UsersMailer.confirmation_email(current_user.id)
-
-        #mail.deliver_now
         mail.deliver_later
         format.html { redirect_to products_path, notice: "Your order has been placed" }
         format.json { render :show, status: :ok, location: @cart }
+      else
+        format.html { redirect_to carts_path, notice: "Your order has been cancelled" }
+        format.json { render :show, status: :ok, location: @cart }
+      end
+
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @cart.errors, status: :unprocessable_entity }
@@ -86,7 +72,6 @@ before_action :set_cart, only: %i[ show edit update destroy  confirm ]
 
 #GET /checkout
   def checkout
-    @cart.user = current_user
   end
 
 
@@ -95,7 +80,8 @@ def confirm
 
   respond_to do |format|
     if @cart.update(cart_params)
-      format.html { redirect_to products_path, notice: "Order was placed" }
+
+      format.html { redirect_to products_path, notice: "Your order was cancelled" }
       format.json { render :show, status: :ok, location: @cart }
     else
       format.html { render :edit, status: :unprocessable_entity }
@@ -114,15 +100,18 @@ end
 
     # Only allow a list of trusted parameters through.
     def cart_params
-      #params.fetch(:cart, {})
-
-      params.require(:cart).permit( :user_id, :order_status,:shipping_address)
+      params.require(:cart).permit( :user_id, :order_status,:shipping_address, :billing_address)
     end
 
-    # def user_params
-    #   params.require(:user).permit( :name , :shipping_address, :email )
-    # end
 
+    def update_order_status
+      if params[:order_status] == "pending"
+        params[:order_status] = "ordered"
+      else
+        params[:order_status] = "cancelled"
+      end
+      
+    end
 
    
 end
