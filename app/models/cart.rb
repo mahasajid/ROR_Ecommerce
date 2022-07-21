@@ -41,22 +41,4 @@ class Cart < ApplicationRecord
     
   end
 
-
-
-#   def update_stock
-#     if self.order_status == "pending"
-#     self.line_items.each {|item|
-#     item.product.stock = item.product.stock - item.quantity
-#     item.product.save
-#     }
-
-#   else
-
-#     self.line_items.each {|item|
-#     item.product.stock = item.product.stock + item.quantity
-#     item.product.save
-#     }
-
-
-#   end
 end
