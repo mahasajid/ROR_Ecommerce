@@ -14,7 +14,7 @@ include Elasticsearch::Model::Callbacks
 settings index: {number_of_shards: 1} do
   mapping dynamic: 'false' do
   indexes :id, type: :integer
-  indexes :name, type: :keyword, analyzer: 'english'
+  indexes :name, type: :search_as_you_type, analyzer: 'english'
   indexes :price, type: :half_float
   indexes :description, type: :keyword
   indexes :stock , type: :integer
