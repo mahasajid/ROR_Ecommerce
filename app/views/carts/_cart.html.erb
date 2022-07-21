@@ -1,2 +1,30 @@
 <div id="<%= dom_id cart %>">
+
+
+<% if cart.order_status == "ordered"%>
+<div class = "card">
+  <p>
+    <strong>Order Status</strong>
+    <%= cart.order_status %>
+  </p>
+
+
+<%= render (cart.line_items) %>
+  <p>
+    <strong>Total Price:</strong>
+    <%= cart.total_price %>
+  </p>
+
+  <p>
+    <strong>Shipping Address</strong>
+    <%= cart.shipping_address %>
+  </p>
+
+
+
+
+</div>
+<%end%>
+
+
 </div>

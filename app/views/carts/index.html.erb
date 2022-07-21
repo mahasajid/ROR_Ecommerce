@@ -1,2 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
+
+<h1>Order History</h1>
+
+<div id="carts">
+  <% current_user.carts.each do |cart| %>
+    <%= render cart %>
+  <% end %>
+</div>
+
+<%= link_to "New cart", new_cart_path %>
