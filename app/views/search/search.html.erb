@@ -1,0 +1,12 @@
+<h1>Products Search</h1>
+
+
+<ul>
+  <% @products.each do |product| %>
+    <li>
+      <h3>
+        <%= link_to product.name, controller: "products", action: "index", id: product.id%>
+      </h3>
+    </li>
+  <% end %>
+</ul>

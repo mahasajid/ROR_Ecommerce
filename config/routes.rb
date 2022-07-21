@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
   registerable: 'users/registrations'} 
-
+  resources :line_items
+  resources :carts
+  resources :products
 
   # devise_scope :user do
   #   get 'users/sessions/history', :to => 'users/sessions#history', as: "history"
@@ -14,12 +16,10 @@ Rails.application.routes.draw do
   put "/checkout", :to => "carts#confirm"
   patch "/checkout", :to => "carts#confirm"
 
-  
+  get '/search' , to: 'search#search'
 
   
-  resources :line_items
-  resources :carts
-  resources :products
+
   #resources :orders
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
