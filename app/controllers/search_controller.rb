@@ -7,6 +7,7 @@ class SearchController < ApplicationController
 
     if params[:q].nil?
         @products = []
+        
     else
         @products = Product.search params[:q]
     end

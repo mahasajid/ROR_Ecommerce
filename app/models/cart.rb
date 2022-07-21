@@ -2,7 +2,7 @@ class Cart < ApplicationRecord
     has_many :line_items, dependent: :destroy
     belongs_to :user, optional: true
     accepts_nested_attributes_for :user
-    before_update :update_order_status
+    before_update :update_order_status , :update_stock
 
 
     def add_product (product)
@@ -30,5 +30,15 @@ class Cart < ApplicationRecord
   def update_order_status
    self.order_status = "ordered"
     
+  end
+
+
+
+  def update_stock
+    self.line_items.each {|item|
+    item.product.stock = item.product.stock - item.quantity
+    item.product.save
+    }
+
   end
 end

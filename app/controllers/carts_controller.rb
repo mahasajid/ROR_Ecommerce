@@ -61,6 +61,10 @@ before_action :set_cart, only: %i[ show edit update destroy  confirm ]
   
     respond_to do |format|
       if @cart.update(cart_params)
+        mail = UsersMailer.confirmation_email(current_user.id)
+
+        #mail.deliver_now
+        mail.deliver_later
         format.html { redirect_to products_path, notice: "Your order has been placed" }
         format.json { render :show, status: :ok, location: @cart }
       else

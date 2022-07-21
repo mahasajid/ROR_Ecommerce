@@ -5,11 +5,14 @@
 <div id="products">
 
   <% @products.each do |product| %>
+  <% cache product do %>
     <%= render product %>
+    <% end %>
     <button>
       <%= link_to "Select", product %>
     </button>
-  <% end %>
+  
+  <%end%>
 </div>
 <%= paginate @products %>
 <%= link_to "New product", new_product_path %>

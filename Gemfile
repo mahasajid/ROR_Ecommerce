@@ -77,3 +77,9 @@ gem "elasticsearch-model", "~> 7.2"
 gem "elasticsearch-persistence", "~> 7.2"
 
 gem 'kaminari'
+gem 'sidekiq'
+gem 'redis-namespace'
+gem "actionpack-page_caching"
+gem "actionpack-action_caching"
+gem 'hiredis'
+gem 'redis'

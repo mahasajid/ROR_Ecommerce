@@ -28,7 +28,7 @@ Rails.application.configure do
       "Cache-Control" => "public, max-age=#{2.days.to_i}"
     }
   else
-    config.action_controller.perform_caching = false
+    config.action_controller.perform_caching = true
 
     config.cache_store = :null_store
   end
@@ -37,7 +37,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  #config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
 
@@ -67,7 +67,25 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+  config.action_controller.perform_caching = true
+  config.cache_store = :redis_cache_store, {  url: ENV['REDIS_URL']}
+  #config.cache_store = :null_store
+
+  config.active_job.queue_adapter = :sidekiq
   
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :user_name            => "maha.sajid@pakeventures.com",
+  :password             => "hhlqdxhwhkciprlb",
+  :authentication       => "plain",
+  :enable_starttls_auto => true
+}
+  #config.action_mailer.smtp_settings = { ... }
 
   #default url for devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
