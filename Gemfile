@@ -11,7 +11,7 @@ gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
 #gem "sqlite3", "~> 1.4"
-gem "pg"
+gem "pg", "1.2"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
@@ -72,9 +72,9 @@ group :test do
   gem "webdrivers"
 end
 
-gem "elasticsearch-rails", "~> 7.2"
-gem "elasticsearch-model", "~> 7.2"
-gem "elasticsearch-persistence", "~> 7.2"
+#gem "elasticsearch-rails", "~> 7.2"
+#gem "elasticsearch-model", "~> 7.2"
+#gem "elasticsearch-persistence", "~> 7.2"
 
 gem 'kaminari'
 gem 'sidekiq'
@@ -91,3 +91,4 @@ gem 'figaro'
 gem 'rake'
 gem 'bonsai-elasticsearch-rails'
 gem 'faker'
+gem 'unicorn'

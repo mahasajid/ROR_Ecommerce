@@ -116,12 +116,6 @@ GEM
       activesupport (> 3)
       elasticsearch (~> 7)
       hashie
-    elasticsearch-persistence (7.2.1)
-      activemodel (> 4)
-      activesupport (> 4)
-      elasticsearch (~> 7)
-      elasticsearch-model (= 7.2.1)
-      hashie
     elasticsearch-rails (7.2.1)
     elasticsearch-transport (7.17.1)
       faraday (~> 1)
@@ -186,6 +180,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    kgio (2.11.4)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -244,7 +239,7 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
-    pg (1.4.1)
+    pg (1.2.0)
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
@@ -280,6 +275,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
+    raindrops (0.20.0)
     rake (13.0.6)
     redis (4.7.1)
     redis-namespace (1.8.2)
@@ -322,6 +318,9 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    unicorn (6.1.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -354,9 +353,6 @@ DEPENDENCIES
   debug
   devise (~> 4.8, >= 4.8.1)
   dotenv-rails
-  elasticsearch-model (~> 7.2)
-  elasticsearch-persistence (~> 7.2)
-  elasticsearch-rails (~> 7.2)
   faker
   figaro
   hiredis
@@ -367,7 +363,7 @@ DEPENDENCIES
   omniauth
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
-  pg
+  pg (= 1.2)
   puma (~> 5.0)
   rails (~> 7.0.3)
   rake
@@ -379,6 +375,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  unicorn
   web-console
   webdrivers
 
